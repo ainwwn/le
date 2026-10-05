@@ -1,30 +1,24 @@
 #include "Book.h"
 #include "Student.h"
-
+#include "Library.h"
 int main()
 {
-    cout << "====Test 1: Book class====" << endl;
     Book b1("C++", "9787115546081", "Press", 49.8, 320, true);
-    b1.showInfo();
+    Library lib;
+    lib.addBook(b1);
 
-    Book b2 = b1;
-    b2.showInfo();
+    cout << "==== Before borrow: Library books ====" << endl;
+    lib.showAllBooks();
 
-    Book b3;
-    b3 = b1;
-
-    cout << "\n====Test 2: Student borrow====" << endl;
     Student s1("2025001", "ZhangSan");
-    s1.showStuInfo();
+    Book& bookFromLib = lib.getBook(0);
+    s1.borrowBook(bookFromLib);
 
-    s1.borrowBook(b1);
-    b1.showInfo();
-    s1.showStuInfo();
+    cout << "\n==== 馆藏这本书借阅后状态 ====" << endl;
+    bookFromLib.showInfo();
 
-    s1.borrowBook(b1);
-
-    s1.returnBook(b1);
-    b1.showInfo();
+    cout << "\n==== Library books after borrow ====" << endl;
+    lib.showAllBooks();
 
     return 0;
 }
